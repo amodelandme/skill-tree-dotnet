@@ -1,6 +1,14 @@
-# 🌳 skill-tree
+# 🌳 skill-tree-dotnet
 
 > A personal library of AI-assisted developer skills. Model-agnostic, .NET-flavored, and always evolving.
+
+**Shout out to [Matt Pocock](https://github.com/mattpocock)! His skills repo was my inspiration for this project.**
+
+I got tired of explaining the same things to AI assistants over and over.
+So I wrote it down once, put it in a folder, and now I just point the AI at the folder.
+
+If you're a .NET dev trying to get more out of AI tooling without burning a week
+reading docs — clone it, steal what's useful, ignore the rest.
 
 ---
 
@@ -14,9 +22,13 @@ No vendor lock-in. Just plain text doing useful things.
 
 ---
 
+
+
 ## Using a skill
 
-Reference a skill in your project's `CLAUDE.md` (or equivalent config file):
+### In Claude Code
+
+Reference a skill in your project's `CLAUDE.md`:
 
 ```md
 ## Skills
@@ -32,6 +44,16 @@ Then just tell your AI assistant to use it:
 ```
 Run the codebase-trivia skill on this project.
 ```
+
+### In Claude.ai
+
+Upload the skill file(s) you want to use as project documents. Then reference them in conversation:
+
+```
+Use the improve-codebase-architecture skill on this codebase.
+```
+
+Skills that spawn parallel sub-agents (like `improve-codebase-architecture`) will run those steps sequentially in Claude.ai — the output is the same, just single-threaded. Each skill notes which mode it's running in and adapts accordingly.
 
 ---
 
@@ -58,7 +80,7 @@ skill-tree/
 ├── dotnet/             # .NET specialist skills (this one grows fast)
 │   ├── dotnet-api-design/
 │   ├── ef-migration-plan/
-│   └── claude-md-generator/
+│   └── project-context-bootstrap/
 ├── learning/           # Interview prep, design drills, domain modeling
 │   ├── codebase-trivia/
 │   ├── grill-me/
@@ -79,7 +101,7 @@ skill-tree/
 |---|---|
 | `write-a-prd` | Turns a vague feature idea into a structured PRD via relentless interview. |
 | `prd-to-plan` | Breaks a PRD into phased tracer-bullet vertical slices saved as a Markdown plan. |
-| `prd-to-issues` | Converts a PRD into independently-grabbable GitHub issues, layer by layer. |
+| `prd-to-issues` | Converts a PRD into independently-grabbable GitHub issues using tracer-bullet vertical slices with HITL/AFK classification. |
 | `request-refactor-plan` | Plans a safe incremental refactor and files it as a GitHub issue with tiny commits. |
 | `write-a-skill` | The meta-skill — scaffolds new skills with proper structure and progressive disclosure. |
 
@@ -99,7 +121,7 @@ skill-tree/
 |---|---|
 | `triage-issue` | Investigates a bug, traces the root cause, and files a TDD-based fix plan as a GitHub issue. |
 | `qa` | Interactive QA session — you describe bugs conversationally, it files clean GitHub issues. |
-| `github-triage` | Manages GitHub issues through a label-based state machine with a .NET-specific label taxonomy. |
+| `github-triage` | Manages GitHub issues through a label-based state machine with HITL/AFK classification. |
 
 ### 🟠 .NET Specialist Skills
 
@@ -107,7 +129,7 @@ skill-tree/
 |---|---|
 | `dotnet-api-design` | *(coming soon)* Designs ASP.NET Core minimal APIs following versioning, validation, and ProblemDetails standards. |
 | `ef-migration-plan` | *(coming soon)* Plans EF Core migrations with rollback strategy and zero-downtime deployment patterns. |
-| `claude-md-generator` | *(coming soon)* Bootstraps a `CLAUDE.md` for any .NET project — discovers architecture and wires up your skill library. |
+| `project-context-bootstrap` | *(coming soon)* Bootstraps a `CLAUDE.md` for any .NET project — discovers architecture and wires up your skill library. |
 
 ### 🟡 Learning & Knowledge
 
@@ -126,10 +148,24 @@ skill-tree/
 
 ---
 
+## HITL / AFK workflow
+
+Several skills classify work as **HITL** (Human In The Loop) or **AFK** (Away From Keyboard):
+
+- **HITL** — requires a human decision before it can progress: architectural choices, design reviews, ambiguous requirements
+- **AFK** — fully specified and can be implemented autonomously by an agent
+
+GitHub issues created by `prd-to-issues` and `github-triage` are labeled accordingly. An agent scanning the backlog can filter `label:afk` to find tickets it's allowed to pick up without waiting for human input.
+
+See `debugging/github-triage/REFERENCE.md` for the one-time label setup command.
+
+---
+
 ## Philosophy
 
 - **Grounded in real code.** Skills read your actual codebase — not generic examples.
-- **Model-agnostic.** Markdown files work everywhere.
+- **Model-agnostic.** Markdown files work everywhere: Claude Code, Claude.ai, Cursor, Copilot.
+- **Draft first, human approves.** Every skill that creates a GitHub artifact shows a preview before filing. Conservative by default — easy to override.
 - **Built for a returning .NET engineer** who treats every line of code as interview prep.
 - **Living document.** A new skill gets added whenever a workflow gets painful enough to warrant one.
 
@@ -139,7 +175,7 @@ skill-tree/
 
 Most skills are tuned for the .NET ecosystem:
 
-`ASP.NET Core` · `Entity Framework Core` · `xUnit` · `Moq` · `MediatR` · `DDD` · `Clean Architecture`
+`ASP.NET Core` · `Entity Framework Core` · `xUnit` · `Moq` · `DDD` · `Clean Architecture`
 
 ---
 
