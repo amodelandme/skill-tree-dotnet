@@ -127,9 +127,9 @@ skill-tree/
 
 | Skill | What it does |
 |---|---|
-| `dotnet-api-design` | *(coming soon)* Designs ASP.NET Core minimal APIs following versioning, validation, and ProblemDetails standards. |
-| `ef-migration-plan` | *(coming soon)* Plans EF Core migrations with rollback strategy and zero-downtime deployment patterns. |
-| `project-context-bootstrap` | *(coming soon)* Bootstraps a `CLAUDE.md` for any .NET project — discovers architecture and wires up your skill library. |
+| `dotnet-api-design` | Designs ASP.NET Core minimal APIs following versioning, validation, and ProblemDetails standards. |
+| `ef-migration-plan` | Plans EF Core migrations with rollback strategy and zero-downtime deployment patterns. |
+| `project-context-bootstrap` | Bootstraps a `CLAUDE.md` or other ai instruction files for any .NET project — discovers architecture and wires up your skill library. |
 
 ### 🟡 Learning & Knowledge
 
