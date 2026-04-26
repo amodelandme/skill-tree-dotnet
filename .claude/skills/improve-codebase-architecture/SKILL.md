@@ -79,12 +79,21 @@ Present designs, then compare in prose. Give a clear recommendation — which de
 
 ### 6. User picks an interface (or accepts recommendation)
 
-### 7. Draft the GitHub RFC
+### 7. Draft the chore file
 
-Using the template in REFERENCE.md, write the full issue body and show it to the user for review. Do NOT create the issue until the user approves. Once approved, run:
+Using the RFC template in REFERENCE.md for the body, draft a chore file and show it to the user for review. Do NOT write the file until the user approves. Once approved, write to `chores/<id>.md`:
 
+```markdown
+---
+id: <kebab-case-id>
+title: <title>
+type: HITL
+status: open
+blocked-by: []
+parent-prd: null
+---
+
+<RFC body from REFERENCE.md template>
 ```
-gh issue create --title "<title>" --body "<body>" --label "rfc,architecture"
-```
 
-Share the issue URL.
+Use `type: HITL` — architecture decisions require human review before any implementation begins.

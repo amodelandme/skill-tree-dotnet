@@ -81,6 +81,36 @@ Write a `UBIQUITOUS_LANGUAGE.md` file with this structure:
 
 </example>
 
+## Drift detection mode
+
+Invocable from `/review` to scan a diff for terminology problems before push. When called with a diff instead of a conversation:
+
+1. **Scan the diff** for new domain-relevant nouns and verbs introduced or modified.
+2. **Compare against `UBIQUITOUS_LANGUAGE.md`** if it exists:
+   - New terms not in the glossary → flag as "undocumented term"
+   - Existing terms used with a shifted meaning → flag as "term drift"
+   - Old aliases-to-avoid appearing in new code → flag as "alias in use"
+3. **Return a structured report** (not a full glossary rewrite):
+
+```
+## Terminology drift — <feature-slug or chore-id>
+
+### Undocumented terms
+- `<term>` — appears N times in diff; not in UBIQUITOUS_LANGUAGE.md
+
+### Term drift
+- `<term>` — glossary says "<current definition>"; diff uses it to mean "<apparent new meaning>"
+
+### Aliases in use
+- `<alias>` — glossary marks this as alias for `<canonical>`; still appearing in diff
+```
+
+If `UBIQUITOUS_LANGUAGE.md` does not exist, return: "No ubiquitous language file found — run `/ubiquitous-language` to create one."
+
+Do not rewrite the glossary in drift detection mode. Surface findings only — `/review` decides what to do with them.
+
+---
+
 ## Re-running
 
 When invoked again in the same conversation:
