@@ -90,11 +90,11 @@ Do not draft or file any GitHub issues yet.
 For the chosen gap:
 - Show the anti-pattern found in the codebase
 - Show the corrected pattern from REFERENCE.md
-- Draft a GitHub issue: title, description, acceptance criteria, HITL/AFK label
+- Draft a chore file: title, intent, acceptance criteria, type (`HITL` if the gap requires design decisions; `AFK` if the fix is mechanical)
 
-Show the draft in full. Ask: **"Should I file this issue?"**
+Show the draft in full. Ask: **"Should I write this chore file?"**
 
-Do not file without explicit confirmation. Repeat for each gap the developer wants to address.
+Once confirmed, write to `chores/<id>.md`. Do not write without explicit confirmation. Repeat for each gap the developer wants to address.
 
 ---
 

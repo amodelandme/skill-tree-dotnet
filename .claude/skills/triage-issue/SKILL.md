@@ -70,12 +70,21 @@ Rules:
 
 ### 5. Draft and review
 
-Write the full issue body using the template in REFERENCE.md. Show it to the user for review. Do NOT file until approved.
+Write the full issue body using the template in REFERENCE.md. Show it to the user for review. Do NOT write the file until approved.
 
-Once approved:
+Once approved, write to `chores/<id>.md`:
 
+```markdown
+---
+id: <kebab-case-id>
+title: <title>
+type: AFK
+status: open
+blocked-by: []
+parent-prd: null
+---
+
+<issue body from REFERENCE.md template>
 ```
-gh issue create --title "<title>" --body "<body>" --label "bug,needs-triage"
-```
 
-Share the issue URL and a one-line summary of the root cause.
+Share a one-line summary of the root cause. Tell the user: `ralph/once.sh` can pick this up immediately.

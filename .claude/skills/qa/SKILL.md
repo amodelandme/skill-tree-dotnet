@@ -48,15 +48,24 @@ Decide before drafting:
 
 ### 4. Draft and review
 
-Draft the issue(s) using the templates in REFERENCE.md. Show the draft(s) to the user before filing. Do NOT create issues until the user approves.
+Draft the issue(s) using the templates in REFERENCE.md. Show the draft(s) to the user before writing. Do NOT write files until the user approves.
 
-Once approved, create in dependency order (blockers first) so real issue numbers can be referenced:
+Once approved, write in dependency order (blockers first) so real IDs can be referenced in `blocked-by`. Write each to `chores/<id>.md`:
 
+```markdown
+---
+id: <kebab-case-id>
+title: <title>
+type: AFK
+status: open
+blocked-by: [<ids>]    # [] if none
+parent-prd: null
+---
+
+<issue body from REFERENCE.md template>
 ```
-gh issue create --title "<title>" --body "<body>" --label "bug,needs-triage"
-```
 
-Share all issue URLs with blocking relationships summarized. Then ask: "Next issue, or are we done?"
+Share file paths with blocking relationships summarized. Then ask: "Next issue, or are we done?"
 
 ### 5. Continue the session
 
