@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Edit(/.claude/skills/write-a-prd/**)",
+      "Edit(/.claude/skills/prd-to-issues/**)",
+      "Edit(/.claude/skills/wrap-up/**)"
+    ]
+  }
+}
